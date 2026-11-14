@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=zynith
+Description=Zynith Distro boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/zynith
+ScriptFile=/usr/share/plymouth/themes/zynith/zynith.script

@@ -1,0 +1,153 @@
+# ============================================================
+# Zynith Distro — Plymouth
+# Símbolo estático y nombre animado con fundidos.
+# ============================================================
+
+# Fondo negro.
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+# ------------------------------------------------------------
+# Recursos.
+# ------------------------------------------------------------
+
+logo_image = Image("tema-init.png");
+
+frames[0] = Image("logo-nombre-1.png");
+frames[1] = Image("logo-nombre-2.png");
+frames[2] = Image("logo-nombre-3.png");
+frames[3] = Image("logo-nombre-4.png");
+frames[4] = Image("logo-nombre-5.png");
+frames[5] = Image("logo-nombre-6.png");
+
+# ------------------------------------------------------------
+# Composición: símbolo arriba y nombre debajo.
+# Se utilizan las dimensiones reales de los archivos.
+# ------------------------------------------------------------
+
+gap = 24;
+
+group_height = logo_image.GetHeight()
+             + gap
+             + frames[0].GetHeight();
+
+group_top = (Window.GetHeight() - group_height) / 2;
+
+logo_x = (Window.GetWidth() - logo_image.GetWidth()) / 2;
+logo_y = group_top;
+
+name_x = (Window.GetWidth() - frames[0].GetWidth()) / 2;
+name_y = group_top + logo_image.GetHeight() + gap;
+
+# Símbolo estático.
+logo_sprite = Sprite(logo_image);
+logo_sprite.SetX(logo_x);
+logo_sprite.SetY(logo_y);
+logo_sprite.SetZ(10);
+
+# Capa base del nombre.
+name_sprite = Sprite(frames[0]);
+name_sprite.SetX(name_x);
+name_sprite.SetY(name_y);
+name_sprite.SetZ(10);
+name_sprite.SetOpacity(1);
+
+# Capa superior: revela el siguiente fotograma.
+name_overlay = Sprite(frames[1]);
+name_overlay.SetX(name_x);
+name_overlay.SetY(name_y);
+name_overlay.SetZ(11);
+name_overlay.SetOpacity(0);
+
+# ------------------------------------------------------------
+# Duraciones expresadas en llamadas al callback de refresco.
+#
+# forward_ticks: transición entre fotogramas 1 → 2 → ... → 6.
+# hold_ticks: pausa con el fotograma 6 completamente visible.
+# return_ticks: transición rápida del fotograma 6 al 1.
+# ------------------------------------------------------------
+
+global.forward_ticks = 12;
+global.hold_ticks = 15;
+global.return_ticks = 8;
+
+# Estado inicial.
+global.current_frame = 0;
+global.tick = 0;
+global.phase = "fade";
+
+# ------------------------------------------------------------
+# Animación en bucle.
+# ------------------------------------------------------------
+
+fun refresh_callback()
+{
+    global.tick++;
+
+    if (global.phase == "hold")
+    {
+        # Mantener brevemente el nombre completamente iluminado.
+        if (global.tick >= global.hold_ticks)
+        {
+            global.phase = "fade";
+            global.tick = 0;
+
+            # Preparar el regreso al primer fotograma.
+            global.name_overlay.SetImage(global.frames[0]);
+            global.name_overlay.SetOpacity(0);
+        }
+    }
+    else
+    {
+        local.next_frame = global.current_frame + 1;
+        local.duration = global.forward_ticks;
+
+        # Desde el último fotograma, volver al primero.
+        if (global.current_frame == 5)
+        {
+            local.next_frame = 0;
+            local.duration = global.return_ticks;
+        }
+
+        # Progreso de la transición: entre 0 y 1.
+        local.alpha = global.tick / local.duration;
+
+        if (local.alpha > 1)
+            local.alpha = 1;
+
+        # Curva suave de entrada y salida.
+        local.alpha = local.alpha * local.alpha
+                    * (3 - 2 * local.alpha);
+
+        global.name_overlay.SetOpacity(local.alpha);
+
+        # Completar la transición.
+        if (global.tick >= local.duration)
+        {
+            global.current_frame = local.next_frame;
+
+            # La imagen que acabamos de revelar pasa a la base.
+            global.name_sprite.SetImage(
+                global.frames[global.current_frame]
+            );
+
+            global.name_overlay.SetOpacity(0);
+            global.tick = 0;
+
+            if (global.current_frame == 5)
+            {
+                # Pausa antes de volver al comienzo.
+                global.phase = "hold";
+            }
+            else
+            {
+                # Preparar el siguiente fotograma.
+                global.name_overlay.SetImage(
+                    global.frames[global.current_frame + 1]
+                );
+            }
+        }
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

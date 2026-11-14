@@ -1,0 +1,748 @@
+/*
+ * Zynith-GTK — Primera versión
+ * Capa de personalización sobre Adwaita oscuro, GTK 3.
+ *
+ * No incluye:
+ * xfwm4, iconos, cursores ni temas de notificaciones.
+ */
+
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
+
+/* ==========================================================
+ * Paleta
+ * ========================================================== */
+
+@define-color zynith_bg          #000000;
+@define-color zynith_surface     #14121c;
+@define-color zynith_hover       #211932;
+@define-color zynith_border      #393044;
+@define-color zynith_text        #e6e6ee;
+@define-color zynith_muted       #aab2c0;
+@define-color zynith_disabled    #77727e;
+@define-color zynith_cyan        #00e5ff;
+@define-color zynith_violet      #7c4dff;
+@define-color zynith_selection   #5935aa;
+
+/* Colores simbólicos que algunas aplicaciones consultan. */
+@define-color theme_bg_color             @zynith_bg;
+@define-color theme_fg_color             @zynith_text;
+@define-color theme_base_color           @zynith_bg;
+@define-color theme_text_color           @zynith_text;
+@define-color theme_selected_bg_color    @zynith_selection;
+@define-color theme_selected_fg_color    #ffffff;
+@define-color insensitive_fg_color       @zynith_disabled;
+@define-color borders                    @zynith_border;
+
+/* ==========================================================
+ * Superficies generales
+ * ========================================================== */
+
+.background {
+    background-color: @zynith_bg;
+    color: @zynith_text;
+}
+
+.view,
+.view text,
+textview text {
+    background-color: @zynith_bg;
+    color: @zynith_text;
+}
+
+toolbar,
+.inline-toolbar,
+actionbar {
+    background-image: none;
+    background-color: @zynith_surface;
+    color: @zynith_text;
+    border-color: @zynith_border;
+}
+
+/* Cabeceras dibujadas por aplicaciones GTK.
+ * No sustituye el tema del gestor de ventanas xfwm4.
+ */
+headerbar {
+    background-image: none;
+    background-color: @zynith_surface;
+    color: @zynith_text;
+    border-color: @zynith_border;
+    box-shadow: none;
+}
+
+/* ==========================================================
+ * Botones
+ * ========================================================== */
+
+button {
+    background-image: none;
+    background-color: @zynith_surface;
+    color: @zynith_text;
+
+    border: 1px solid @zynith_border;
+    border-radius: 6px;
+
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button:hover {
+    background-image: none;
+    background-color: @zynith_hover;
+    border-color: @zynith_violet;
+}
+
+button:active,
+button:checked {
+    background-image: none;
+    background-color: @zynith_selection;
+    color: #ffffff;
+    border-color: @zynith_violet;
+}
+
+button:focus {
+    border-color: @zynith_cyan;
+}
+
+button:disabled {
+    background-image: none;
+    background-color: #0c0b10;
+    color: @zynith_disabled;
+    border-color: #26212e;
+}
+
+button.flat {
+    background-image: none;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: @zynith_hover;
+    border-color: @zynith_border;
+}
+
+button.suggested-action {
+    background-image: none;
+    background-color: @zynith_selection;
+    color: #ffffff;
+    border-color: @zynith_violet;
+}
+
+button.suggested-action:hover {
+    background-color: @zynith_violet;
+}
+
+/* Los botones destructivos conservan la semántica de advertencia. */
+button.destructive-action {
+    background-image: none;
+    background-color: #702838;
+    color: #ffffff;
+    border-color: #cb526b;
+}
+
+button.destructive-action:hover {
+    background-color: #913248;
+}
+
+/* ==========================================================
+ * Campos de entrada
+ * ========================================================== */
+
+entry,
+spinbutton:not(.vertical) {
+    background-image: none;
+    background-color: @zynith_bg;
+    color: @zynith_text;
+
+    border: 1px solid @zynith_border;
+    border-radius: 6px;
+
+    box-shadow: none;
+    caret-color: @zynith_cyan;
+}
+
+entry:focus,
+spinbutton:not(.vertical):focus {
+    border-color: @zynith_cyan;
+    box-shadow: inset 0 0 0 1px alpha(@zynith_cyan, 0.20);
+}
+
+entry:disabled,
+spinbutton:disabled {
+    color: @zynith_disabled;
+    background-color: #0c0b10;
+}
+
+/* Selección de texto. */
+selection,
+entry selection,
+textview text selection {
+    background-color: @zynith_selection;
+    color: #ffffff;
+}
+
+/* ==========================================================
+ * Menús y ventanas emergentes
+ * ========================================================== */
+
+menu,
+.context-menu {
+    background-color: @zynith_surface;
+    color: @zynith_text;
+    border: 1px solid @zynith_border;
+}
+
+menubar {
+    background-color: @zynith_bg;
+    color: @zynith_text;
+}
+
+menuitem {
+    color: @zynith_text;
+}
+
+menuitem:hover {
+    background-image: none;
+    background-color: @zynith_selection;
+    color: #ffffff;
+}
+
+menuitem:disabled {
+    color: @zynith_disabled;
+}
+
+popover,
+popover.background {
+    background-color: @zynith_surface;
+    color: @zynith_text;
+    border-color: @zynith_border;
+}
+
+tooltip,
+tooltip.background {
+    background-color: @zynith_surface;
+    color: @zynith_text;
+    border: 1px solid @zynith_violet;
+}
+
+tooltip label {
+    color: @zynith_text;
+}
+
+/* ==========================================================
+ * Listas, tablas y navegación lateral
+ * ========================================================== */
+
+list,
+treeview.view {
+    background-color: @zynith_bg;
+    color: @zynith_text;
+}
+
+list row:hover {
+    background-color: @zynith_hover;
+}
+
+list row:selected,
+treeview.view:selected,
+.view:selected {
+    background-color: @zynith_selection;
+    color: #ffffff;
+}
+
+.sidebar {
+    background-color: @zynith_surface;
+    color: @zynith_text;
+}
+
+.sidebar row:selected {
+    background-color: @zynith_selection;
+    color: #ffffff;
+}
+
+/* ==========================================================
+ * Pestañas
+ * ========================================================== */
+
+notebook > header {
+    background-color: @zynith_surface;
+    border-color: @zynith_border;
+}
+
+notebook > header tabs > tab {
+    background-color: transparent;
+    color: @zynith_muted;
+
+    border: none;
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+notebook > header tabs > tab:hover {
+    background-color: @zynith_hover;
+    color: @zynith_text;
+}
+
+notebook > header tabs > tab:checked {
+    background-color: @zynith_bg;
+    color: @zynith_cyan;
+    box-shadow: inset 0 -2px @zynith_violet;
+}
+
+notebook > stack {
+    background-color: @zynith_bg;
+}
+
+/* ==========================================================
+ * Barras de desplazamiento
+ * ========================================================== */
+
+scrollbar {
+    background-color: @zynith_bg;
+}
+
+scrollbar trough {
+    background-color: @zynith_bg;
+}
+
+scrollbar slider {
+    background-color: #51435f;
+
+    border: none;
+    border-radius: 8px;
+
+    min-width: 8px;
+    min-height: 8px;
+}
+
+scrollbar slider:hover {
+    background-color: @zynith_violet;
+}
+
+scrollbar slider:active {
+    background-color: @zynith_cyan;
+}
+
+/* ==========================================================
+ * Progreso y deslizadores
+ * ========================================================== */
+
+progressbar trough,
+levelbar trough {
+    background-color: @zynith_surface;
+    border: 1px solid @zynith_border;
+    border-radius: 5px;
+}
+
+progressbar progress {
+    background-image: none;
+    background-color: @zynith_cyan;
+
+    border: none;
+    border-radius: 5px;
+}
+
+scale trough {
+    background-color: @zynith_surface;
+    border-color: @zynith_border;
+}
+
+scale highlight {
+    background-image: none;
+    background-color: @zynith_violet;
+    border-color: @zynith_violet;
+}
+
+scale slider {
+    background-image: none;
+    background-color: @zynith_text;
+    border-color: @zynith_border;
+}
+
+scale slider:hover {
+    background-color: @zynith_cyan;
+}
+
+/* ==========================================================
+ * Casillas, opciones e interruptores
+ * ========================================================== */
+
+check,
+radio {
+    background-image: none;
+    background-color: @zynith_surface;
+    border-color: @zynith_border;
+    color: @zynith_text;
+}
+
+check:checked,
+check:indeterminate,
+radio:checked,
+radio:indeterminate {
+    background-image: none;
+    background-color: @zynith_selection;
+    border-color: @zynith_violet;
+    color: #ffffff;
+}
+
+check:hover,
+radio:hover {
+    border-color: @zynith_cyan;
+}
+
+switch {
+    background-image: none;
+    background-color: @zynith_surface;
+    border-color: @zynith_border;
+    color: @zynith_muted;
+}
+
+switch:checked {
+    background-color: @zynith_selection;
+    border-color: @zynith_violet;
+    color: #ffffff;
+}
+
+switch slider {
+    background-image: none;
+    background-color: @zynith_text;
+    border-color: @zynith_border;
+}
+
+/* ==========================================================
+ * Separadores, enlaces y ventanas inactivas
+ * ========================================================== */
+
+separator {
+    background-color: @zynith_border;
+}
+
+*:link {
+    color: @zynith_cyan;
+}
+
+*:visited {
+    color: #b194ff;
+}
+
+headerbar:backdrop {
+    background-color: #0c0b10;
+    color: @zynith_muted;
+}
+/* ==========================================================
+ * Zynith-GTK — revisión Black
+ * Añadir al final del archivo.
+ * ========================================================== */
+
+/* Paleta más neutra: negro dominante. */
+@define-color zynith_bg          #000000;
+@define-color zynith_surface     #050505;
+@define-color zynith_hover       #101014;
+@define-color zynith_border      #27232f;
+@define-color zynith_text        #e6e6ee;
+@define-color zynith_muted       #aab2c0;
+@define-color zynith_disabled    #706b78;
+@define-color zynith_selection   #241237;
+
+@define-color theme_bg_color             #000000;
+@define-color theme_fg_color             #e6e6ee;
+@define-color theme_base_color           #000000;
+@define-color theme_text_color           #e6e6ee;
+@define-color theme_selected_bg_color    #241237;
+@define-color theme_selected_fg_color    #ffffff;
+
+@define-color theme_unfocused_bg_color          #000000;
+@define-color theme_unfocused_fg_color          #aab2c0;
+@define-color theme_unfocused_base_color        #000000;
+@define-color theme_unfocused_text_color        #aab2c0;
+@define-color theme_unfocused_selected_bg_color #181020;
+@define-color theme_unfocused_selected_fg_color #e6e6ee;
+
+@define-color insensitive_bg_color #050505;
+@define-color insensitive_fg_color #706b78;
+@define-color borders              #27232f;
+@define-color unfocused_borders    #1c1a20;
+
+/* Ventanas y superficies principales. */
+.background,
+.background:backdrop,
+dialog.background {
+    background-image: none;
+    background-color: #000000;
+    color: @zynith_text;
+}
+
+.view,
+.view:backdrop,
+.view text,
+textview,
+textview text,
+textview text:backdrop,
+treeview.view,
+treeview.view:backdrop,
+iconview.view,
+iconview.view:backdrop {
+    background-color: #000000;
+    color: @zynith_text;
+}
+
+viewport,
+scrolledwindow > viewport,
+list,
+list:backdrop {
+    background-color: #000000;
+    color: @zynith_text;
+}
+
+/* Cabeceras, herramientas y zonas de acciones. */
+headerbar,
+headerbar:backdrop,
+toolbar,
+toolbar:backdrop,
+.inline-toolbar,
+actionbar,
+actionbar:backdrop,
+statusbar {
+    background-image: none;
+    background-color: #050505;
+    color: @zynith_text;
+    border-color: @zynith_border;
+    box-shadow: none;
+}
+
+/* Menús y ventanas emergentes. */
+menubar,
+menu,
+.context-menu,
+popover,
+popover.background,
+popover:backdrop {
+    background-image: none;
+    background-color: #000000;
+    color: @zynith_text;
+    border-color: @zynith_border;
+}
+
+menuitem {
+    background-image: none;
+    background-color: transparent;
+    color: @zynith_text;
+}
+
+menuitem:hover {
+    background-image: none;
+    background-color: #241237;
+    color: #00e5ff;
+}
+
+menuitem:disabled {
+    color: @zynith_disabled;
+}
+
+/* Botones: eliminar superficies grises y degradados. */
+button,
+button:backdrop {
+    background-image: none;
+    background-color: #080808;
+    color: @zynith_text;
+    border-color: @zynith_border;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button:hover {
+    background-image: none;
+    background-color: #141018;
+    border-color: #7c4dff;
+}
+
+button:active,
+button:checked {
+    background-image: none;
+    background-color: #241237;
+    color: #ffffff;
+    border-color: #7c4dff;
+}
+
+button:focus {
+    border-color: #00e5ff;
+}
+
+button:disabled,
+button:disabled:backdrop {
+    background-image: none;
+    background-color: #050505;
+    color: @zynith_disabled;
+    border-color: #1c1a20;
+}
+
+button.flat,
+button.flat:backdrop {
+    background-image: none;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: #141018;
+    border-color: @zynith_border;
+}
+
+button.suggested-action {
+    background-image: none;
+    background-color: #241237;
+    border-color: #7c4dff;
+    color: #ffffff;
+}
+
+button.suggested-action:hover {
+    background-color: #38204d;
+}
+
+/* Mantener visibles las acciones destructivas. */
+button.destructive-action {
+    background-image: none;
+    background-color: #351019;
+    border-color: #a43d54;
+    color: #ffffff;
+}
+
+button.destructive-action:hover {
+    background-color: #501723;
+}
+
+/* Campos de texto. */
+entry,
+entry:backdrop,
+spinbutton:not(.vertical),
+spinbutton:not(.vertical):backdrop {
+    background-image: none;
+    background-color: #000000;
+    color: @zynith_text;
+    border-color: @zynith_border;
+}
+
+entry:focus,
+spinbutton:not(.vertical):focus {
+    border-color: #00e5ff;
+}
+
+/* Selecciones: sustituir el azul heredado. */
+.view:selected,
+.view:selected:focus,
+treeview.view:selected,
+treeview.view:selected:focus,
+iconview.view:selected,
+iconview.view:selected:focus,
+list row:selected,
+list row:selected:hover,
+.sidebar row:selected {
+    background-image: none;
+    background-color: #241237;
+    color: #ffffff;
+}
+
+.view:selected:backdrop,
+treeview.view:selected:backdrop,
+iconview.view:selected:backdrop,
+list row:selected:backdrop {
+    background-color: #181020;
+    color: @zynith_text;
+}
+
+selection,
+entry selection,
+textview text selection {
+    background-color: #35204f;
+    color: #ffffff;
+}
+
+list row {
+    background-color: transparent;
+}
+
+list row:hover {
+    background-color: #101014;
+}
+
+/* Navegación lateral. */
+.sidebar,
+.sidebar:backdrop {
+    background-image: none;
+    background-color: #000000;
+    color: @zynith_text;
+}
+
+/* Pestañas. */
+notebook > header,
+notebook > header:backdrop {
+    background-image: none;
+    background-color: #050505;
+    border-color: @zynith_border;
+}
+
+notebook > header tabs > tab {
+    background-image: none;
+    background-color: transparent;
+    color: @zynith_muted;
+}
+
+notebook > header tabs > tab:hover {
+    background-color: #101014;
+}
+
+notebook > header tabs > tab:checked {
+    background-color: #000000;
+    color: #00e5ff;
+    box-shadow: inset 0 -2px #7c4dff;
+}
+
+notebook > stack {
+    background-color: #000000;
+}
+
+/* Desplazamiento: sutil, pero visible. */
+scrollbar,
+scrollbar trough {
+    background-color: #000000;
+}
+
+scrollbar slider {
+    background-color: #38303f;
+}
+
+scrollbar slider:hover {
+    background-color: #7c4dff;
+}
+
+scrollbar slider:active {
+    background-color: #00e5ff;
+}
+
+/* Canales de indicadores. */
+progressbar trough,
+levelbar trough,
+scale trough {
+    background-image: none;
+    background-color: #080808;
+    border-color: @zynith_border;
+}
+
+/* Interruptores. */
+switch,
+switch:backdrop {
+    background-image: none;
+    background-color: #080808;
+    border-color: @zynith_border;
+}
+
+switch:checked {
+    background-color: #241237;
+    border-color: #7c4dff;
+}
+
+/* Separadores discretos. */
+separator {
+    background-color: #27232f;
+}
