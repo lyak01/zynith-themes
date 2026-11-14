@@ -1,0 +1,147 @@
+/*
+ * Zynith-Notify-Texture
+ * Plantilla de notificaciones para xfce4-notifyd / GTK 3.
+ *
+ * Fondo esperado:
+ *     notif-bg.png
+ *
+ * Colocar la imagen junto a este gtk.css.
+ * Tamaño de partida recomendado: 1024 x 512 px.
+ *
+ * Intensidad del oscurecimiento:
+ *     0.95 = textura muy tenue
+ *     0.85 = textura discreta
+ *     0.60 = imagen más visible
+ *
+ * Cambiar los dos valores 0.85 del degradado para ajustarlo.
+ */
+
+/* ==========================================================
+ * Ventana y fondo
+ * ========================================================== */
+
+#XfceNotifyWindow {
+    background-color: #000000;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.85),
+            rgba(0, 0, 0, 0.85)
+        ),
+        url("notif-bg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #e6e6ee;
+
+    border: 2px solid #7c4dff;
+    border-radius: 10px;
+
+    padding: 16px;
+
+    box-shadow: none;
+    text-shadow: none;
+
+    font-family: "DejaVu Sans", sans-serif;
+    font-size: 14px;
+}
+
+/* Conserva la imagen; solo cambia el borde. */
+#XfceNotifyWindow:hover {
+    border-color: #00e5ff;
+}
+
+/* ==========================================================
+ * Texto
+ * ========================================================== */
+
+#XfceNotifyWindow label {
+    color: #e6e6ee;
+    text-shadow: none;
+}
+
+#XfceNotifyWindow label#summary {
+    color: #00e5ff;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+}
+
+#XfceNotifyWindow label#body {
+    color: #e6e6ee;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Iconos que acepten el color del tema. */
+#XfceNotifyWindow image {
+    color: #00e5ff;
+}
+
+/* ==========================================================
+ * Botones
+ * ========================================================== */
+
+#XfceNotifyWindow button {
+    background-image: none;
+    background-color: #14121c;
+    color: #e6e6ee;
+
+    border: 1px solid #7c4dff;
+    border-radius: 6px;
+
+    padding: 6px 12px;
+
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#XfceNotifyWindow button label {
+    color: #e6e6ee;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#XfceNotifyWindow button:hover {
+    background-image: none;
+    background-color: #211932;
+    border-color: #00e5ff;
+}
+
+#XfceNotifyWindow button:active {
+    background-image: none;
+    background-color: #332052;
+}
+
+/* ==========================================================
+ * Indicadores de progreso, volumen o brillo
+ * ========================================================== */
+
+#XfceNotifyWindow progressbar {
+    min-height: 8px;
+}
+
+#XfceNotifyWindow progressbar trough {
+    background-image: none;
+    background-color: #14121c;
+
+    border: 1px solid #393044;
+    border-radius: 4px;
+
+    min-height: 8px;
+    box-shadow: none;
+}
+
+#XfceNotifyWindow progressbar progress {
+    background-image: none;
+    background-color: #00e5ff;
+
+    border: none;
+    border-radius: 4px;
+
+    min-height: 8px;
+    box-shadow: none;
+}

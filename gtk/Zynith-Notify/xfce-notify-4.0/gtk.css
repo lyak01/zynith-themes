@@ -1,0 +1,126 @@
+/*
+ * Zynith-Notify
+ * Tema de ejemplo para xfce4-notifyd y GTK 3.
+ *
+ * Paleta:
+ * Fondo:    #000000
+ * Superficie secundaria: #14121c
+ * Texto:    #e6e6ee
+ * Cian:     #00e5ff
+ * Violeta:  #7c4dff
+ */
+
+/* Ventana de notificación. */
+#XfceNotifyWindow {
+    background-image: none;
+    background-color: #000000;
+    color: #e6e6ee;
+
+    border: 2px solid #7c4dff;
+    border-radius: 10px;
+
+    padding: 16px;
+    box-shadow: none;
+    text-shadow: none;
+
+    font-family: "DejaVu Sans", sans-serif;
+    font-size: 14px;
+}
+
+/* Resaltar el borde al pasar el puntero. */
+#XfceNotifyWindow:hover {
+    background-image: none;
+    background-color: #000000;
+    border-color: #00e5ff;
+}
+
+/* Texto general. */
+#XfceNotifyWindow label {
+    color: #e6e6ee;
+    text-shadow: none;
+}
+
+/* Título. */
+#XfceNotifyWindow label#summary {
+    color: #00e5ff;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Cuerpo del mensaje. */
+#XfceNotifyWindow label#body {
+    color: #e6e6ee;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Iconos simbólicos, cuando admiten color del tema. */
+#XfceNotifyWindow image {
+    color: #00e5ff;
+}
+
+/* Botones de acciones. */
+#XfceNotifyWindow button {
+    background-image: none;
+    background-color: #14121c;
+    color: #e6e6ee;
+
+    border: 1px solid #7c4dff;
+    border-radius: 6px;
+
+    padding: 6px 12px;
+
+    box-shadow: none;
+    text-shadow: none;
+}
+
+/* Texto de los botones. */
+#XfceNotifyWindow button label {
+    color: #e6e6ee;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Botón bajo el puntero. */
+#XfceNotifyWindow button:hover {
+    background-image: none;
+    background-color: #211932;
+    border-color: #00e5ff;
+}
+
+/* Botón pulsado. */
+#XfceNotifyWindow button:active {
+    background-image: none;
+    background-color: #332052;
+}
+
+/* Indicadores: contenedor. */
+#XfceNotifyWindow progressbar {
+    min-height: 8px;
+}
+
+/* Canal del indicador. */
+#XfceNotifyWindow progressbar trough {
+    background-image: none;
+    background-color: #14121c;
+
+    border: 1px solid #393044;
+    border-radius: 4px;
+
+    min-height: 8px;
+    box-shadow: none;
+}
+
+/* Parte llena del indicador. */
+#XfceNotifyWindow progressbar progress {
+    background-image: none;
+    background-color: #00e5ff;
+
+    border: none;
+    border-radius: 4px;
+
+    min-height: 8px;
+    box-shadow: none;
+}
