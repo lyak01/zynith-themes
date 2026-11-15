@@ -1,0 +1,76 @@
+# ============================================================
+# Zynith Distro — GRUB
+# Fondo negro, identidad estatica y seleccion cian.
+# ============================================================
+
+desktop-color: "#000000"
+title-text: ""
+
+# Simbolo estatico.
++ image {
+    left = 50%-80
+    top = 4%
+    width = 160
+    height = 160
+    file = "simbolo.png"
+}
+
+# Nombre completamente iluminado.
+# El archivo es cuadrado: conservar su proporcion.
++ image {
+    left = 50%-110
+    top = 28%
+    width = 220
+    height = 220
+    file = "nombre.png"
+}
+
+# Menu de arranque.
++ boot_menu {
+    left = 15%
+    top = 65%
+    width = 70%
+    height = 21%
+
+    item_color = "#D8DEE9"
+    selected_item_color = "#00E5FF"
+
+    item_height = 32
+    item_padding = 8
+    item_spacing = 4
+
+    icon_width = 0
+    icon_height = 0
+    item_icon_space = 0
+
+    scrollbar = false
+}
+
+# Cuenta regresiva para arrancar la entrada predeterminada.
++ progress_bar {
+    id = "__timeout__"
+
+    left = 25%
+    top = 90%
+    width = 50%
+    height = 18
+
+    fg_color = "#7C4DFF"
+    bg_color = "#14141C"
+    border_color = "#343044"
+
+    text_color = "#FFFFFF"
+    text = "Inicio automatico en %d s"
+}
+
+# Instrucciones.
++ label {
+    left = 10%
+    top = 96%-16
+    width = 80%
+    height = 20
+
+    text = "Flechas: seleccionar | Enter: iniciar | E: editar"
+    color = "#8993A5"
+    align = "center"
+}
